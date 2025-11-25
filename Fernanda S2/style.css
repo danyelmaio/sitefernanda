@@ -1,0 +1,189 @@
+/* --- PALETA DE CORES: ROSA NEON & DARK --- */
+:root {
+    --bg: #0d000a; /* Fundo quase preto, levemente rosado */
+    --card-bg: rgba(30, 0, 20, 0.4); /* Vidro escuro rosado */
+    --glass-border: rgba(255, 100, 200, 0.2); /* Borda rosa suave */
+    --text-color: #ffe0f0; /* Texto rosa muito claro */
+    
+    /* CORES NEON PRINCIPAIS */
+    --primary-accent: #ff007f; /* ROSA NEON BRILHANTE (Fúcsia) */
+    --secondary-accent: #a80056; /* ROSA ESCURO PROFUNDO */
+    --highlight: #ff66b2; /* ROSA MÉDIO CLARO */
+    --heart-color: #ff99cc; /* CORAÇÕES FLUTUANTES */
+}
+
+/* --- RESET E BASE --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Exo 2', sans-serif; /* Nova fonte para o corpo do texto */
+    background-color: var(--bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- BACKGROUNDS --- */
+.background-grid {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 0, 127, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 0, 127, 0.05) 1px, transparent 1px);
+}
+
+/* CORAÇÕES FLUTUANTES NO FUNDO */
+.hearts-background {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3;
+    overflow: hidden;
+    filter: blur(5px); /* Suaviza os corações */
+}
+.heart {
+    position: absolute;
+    background-color: var(--heart-color);
+    height: 25px; width: 25px;
+    transform: rotate(45deg);
+    opacity: 0; /* Começa invisível */
+    animation: floatHeart linear infinite;
+    box-shadow: 0 0 15px var(--heart-color); /* Efeito glow */
+}
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    width: 25px; height: 25px;
+    border-radius: 50%;
+}
+.heart::before { top: -12.5px; left: 0; }
+.heart::after { left: -12.5px; top: 0; }
+
+@keyframes floatHeart {
+    0% { transform: translateY(0) rotate(45deg) scale(0.8); opacity: 0.8; }
+    100% { transform: translateY(-120vh) rotate(45deg) scale(1.2); opacity: 0; }
+}
+
+
+/* --- GLASSMORPHISM (Cartões de Vidro) --- */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px); /* Mais desfoque para o vidro */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.6); /* Sombra mais intensa */
+    padding: 40px;
+    margin: 50px auto;
+    transition: all 0.3s ease;
+}
+
+/* --- TIPOGRAFIA --- */
+h1, h2 { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 1px; }
+
+.neon-text {
+    background: linear-gradient(to right, var(--highlight), var(--primary-accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(255, 0, 127, 0.6); /* Brilho rosa mais forte */
+}
+.neon-text-subtle { color: var(--highlight); text-shadow: 0 0 12px rgba(255, 102, 178, 0.5); }
+.glow-subtle { color: var(--text-color); }
+
+/* --- HEADER & HERO --- */
+.main-header { text-align: center; padding: 80px 10px 40px; }
+.main-header h1 { font-size: 3.8em; margin-bottom: 10px; }
+
+.hero-photo-section { margin-bottom: 60px; }
+.hero-photo-container {
+    max-width: 600px;
+    position: relative;
+    padding: 10px; 
+    overflow: hidden;
+    text-align: center;
+}
+.hero-photo-container img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid var(--primary-accent);
+    box-shadow: 0 0 20px var(--primary-accent); /* Brilho na foto principal */
+}
+.hero-text {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.4); /* Fundo um pouco mais escuro para o texto */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+}
+
+/* --- BLOCOS DE CONTEÚDO --- */
+.message-photo-block {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.reverse-layout { flex-direction: row-reverse; }
+
+.text-container { flex: 1; }
+.text-container h2 { font-size: 2em; margin-bottom: 15px; border-bottom: 2px solid var(--secondary-accent); display: inline-block; }
+
+.photo-container {
+    flex: 0 0 320px;
+    height: 400px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid var(--primary-accent);
+    box-shadow: 0 0 15px var(--primary-accent);
+    transform: rotate(var(--rotation));
+}
+.photo-container img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- SPOTIFY & FOOTER --- */
+.spotify-section { text-align: center; }
+footer { text-align: center; padding: 40px; font-size: 0.9em; opacity: 0.8; }
+
+/* --- ANIMAÇÕES (Mantidas) --- */
+.animate-fade-in, .animate-slide-up {
+    opacity: 0; transform: translateY(30px); transition: all 0.8s ease;
+}
+.visible { opacity: 1; transform: translateY(0); }
+
+
+/* =========================================
+   RESPONSIVIDADE (PARA CELULAR)
+   ========================================= */
+@media (max-width: 768px) {
+    .main-header h1 { font-size: 2em; }
+    .main-header .subtitle { font-size: 0.9em; }
+    h2 { font-size: 1.6em; }
+    p { font-size: 0.9em; }
+
+    .message-photo-block, .reverse-layout {
+        flex-direction: column !important;
+        gap: 20px;
+        padding: 20px;
+        margin: 30px auto;
+        text-align: center;
+    }
+
+    .hero-photo-container { padding: 10px; }
+    .hero-photo-container img { max-height: 400px; }
+
+    .photo-container {
+        width: 100%;
+        flex: none;
+        height: 300px;
+        transform: rotate(0deg) !important;
+        margin-bottom: 15px;
+    }
+}
